@@ -14,7 +14,7 @@ const logout = async () => {
 const useAuth = () => {
     // Replace with your actual authentication context
     return {
-        isLoggedIn: false, // Change to true to test logged-in state
+        isLoggedIn: true, // Change to true to test logged-in state
         userData: {
             email: "john.doe@example.com",
             firstName: "John",
@@ -32,7 +32,7 @@ export function Navigation() {
     const { isLoggedIn, userData } = useAuth();
 
     const handleLogin = () => {
-        navigate('/auth/signup');
+        navigate('/auth/login');
     };
 
     const handleLogout = async () => {
@@ -50,7 +50,7 @@ export function Navigation() {
         if (userData?.role === 'admin') {
             navigate('/admin');
         } else {
-            navigate('/dashboard');
+            navigate('/dashboard/');
         }
         setIsProfileDropdownOpen(false);
     };
@@ -128,7 +128,7 @@ export function Navigation() {
                                     : 'hover:bg-emerald-50 hover:text-emerald-700'
                                 }
                                 `}>
-                            <Link to="/earning-system" className="flex items-center gap-2">
+                            <Link to="/" className="flex items-center gap-2">
                                 <Award className="w-4 h-4" />
                                 <span className="hidden sm:inline">Home</span>
                             </Link>
@@ -165,27 +165,7 @@ export function Navigation() {
                             </Link>
                         </Button>
 
-                        {/* Show navigation based on login status and role */}
-                        {isLoggedIn && userData?.role === 'student' && (
-                            <>
-                                <Button
-                                    variant={location.pathname === '/dashboard' ? 'default' : 'ghost'}
-                                    asChild
-                                    className={`
-                    transition-all duration-200 hover:scale-105
-                    ${location.pathname === '/dashboard'
-                                            ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-md'
-                                            : 'hover:bg-emerald-50 hover:text-emerald-700'
-                                        }
-                  `}
-                                >
-                                    <Link to="/dashboard" className="flex items-center gap-2">
-                                        <User className="w-4 h-4" />
-                                        <span className="hidden sm:inline">Dashboard</span>
-                                    </Link>
-                                </Button>
-                            </>
-                        )}
+
 
                         {/* Profile Dropdown Menu when logged in */}
                         {isLoggedIn ? (
@@ -304,7 +284,7 @@ export function Navigation() {
                                         hover:bg-emerald-600 hover:text-white 
                                         hover:scale-105 hover:shadow-lg
                                         transform
-                                        ${location.pathname === '/auth/signup' ? 'shadow-md' : ''}
+                                        ${location.pathname === '/auth/login' ? 'shadow-md' : ''}
                                     `}>
                                     Sign Up
                                 </Button>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, MapPin, Search, Star, Shield, Zap, Users } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
-
+import { Navigation } from "@/components/Navbar";
 export default function LandingPage() {
     const [searchData, setSearchData] = useState({
         pickupLocation: '',
@@ -64,6 +64,7 @@ export default function LandingPage() {
 
     return (
         <div className="min-h-screen bg-white">
+            <Navigation />
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center pt-16 bg-linear-to-br from-gray-900 via-blue-900 to-purple-900">
                 {/* Animated Background */}

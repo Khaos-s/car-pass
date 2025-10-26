@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority@0.7.1";
+import { cva } from "class-variance-authority";
 
 import { cn } from "./utils";
 
@@ -9,58 +9,56 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: "bg-card text-card-foreground",
-        destructive:
-          "text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
+        destructive: "text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
       },
     },
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
-function Alert({
-  className,
-  variant,
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+const Alert = React.forwardRef(({ className, variant, ...props }, ref) => {
   return (
     <div
       data-slot="alert"
       role="alert"
       className={cn(alertVariants({ variant }), className)}
+      ref={ref}
       {...props}
     />
   );
-}
+});
+Alert.displayName = "Alert";
 
-function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
+const AlertTitle = React.forwardRef(({ className, ...props }, ref) => {
   return (
     <div
       data-slot="alert-title"
       className={cn(
         "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
-        className,
+        className
       )}
+      ref={ref}
       {...props}
     />
   );
-}
+});
+AlertTitle.displayName = "AlertTitle";
 
-function AlertDescription({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+const AlertDescription = React.forwardRef(({ className, ...props }, ref) => {
   return (
     <div
       data-slot="alert-description"
       className={cn(
         "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
-        className,
+        className
       )}
+      ref={ref}
       {...props}
     />
   );
-}
+});
+AlertDescription.displayName = "AlertDescription";
 
 export { Alert, AlertTitle, AlertDescription };
